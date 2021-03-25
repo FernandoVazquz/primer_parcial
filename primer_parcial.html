@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primer parcial</title>
+
+    <style>
+        table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 50%;
+    }
+
+    td, th, caption {
+        border: 1px solid #050505;
+        text-align: center;
+        padding: 5px;
+    }
+    </style>
+    <script language="JavaScript">
+        function reloj(){
+            momentoActual = new Date()
+            hora = momentoActual.getHours()
+            minuto = momentoActual.getMinutes()
+            segundo = momentoActual.getSeconds()
+        
+            horaAc = hora + " : " + minuto + " : " + segundo
+        
+            document.form_reloj.reloj.value = horaAc
+        
+            setTimeout("reloj()",1000)
+        }
+        </script>
+</head>
+<body onload="reloj()">
+        <form name="form_reloj">
+            <p>Hora actual: </p>
+            <input type="text" name="reloj" size="10">
+        </form>
+            <br>
+            <br>
+    <table>
+        <caption>Billar panchita</caption>
+
+        <tr>
+            <td>Mesa 1</td>
+            <td>Mesa 2</td>
+            <td>Mesa 3</td>
+        </tr>
+        <tr>
+            <td><img  src="mesaSinUso.png" id = "MESA1" onclick="mesaUsada(1);"></td>
+            <td><img  src="mesaSinUso.png" id = "MESA2" onclick="mesaUsada(2);"></td>
+            <td><img  src="mesaSinUso.png" id = "MESA3" onclick="mesaUsada(3);"></td>
+        </tr>
+        <tr>
+            <td><p id = "horaIni1">Hora inicio:</p><p id = "horaFin1">Hora final:</p><p id = "total1">Total:</p></td>
+            <td><p id = "horaIni2">Hora inicio:</p><p id = "horaFin2">Hora final:</p><p id = "total2">Total:</p></td>
+            <td><p id = "horaIni3">Hora inicio:</p><p id = "horaFin3">Hora final:</p><p id = "total3">Total:</p></td>
+        </tr>
+        <tr>
+            <td>Mesa 4</td>
+            <td>Mesa 5</td>
+            <td>Mesa 6</td>
+        </tr>
+        <tr>
+            <td><img  src="mesaSinUso.png" id = "MESA4" onclick="mesaUsada(4);"></td>
+            <td><img  src="mesaSinUso.png" id = "MESA5" onclick="mesaUsada(5);"></td>
+            <td><img  src="mesaSinUso.png" id = "MESA6" onclick="mesaUsada(6);"></td>
+        </tr>
+        <tr>
+            <td><p id = "horaIni4">Hora inicio:</p><p id = "horaFin4">Hora final:</p><p id = "total4">Total:</p></td>
+            <td><p id = "horaIni5">Hora inicio:</p><p id = "horaFin5">Hora final:</p><p id = "total5">Total:</p></td>
+            <td><p id = "horaIni6">Hora inicio:</p><p id = "horaFin6">Hora final:</p><p id = "total6">Total:</p></td>
+        </tr>
+    </table>
+
+    <script>
+        let hrinicial1   // Guarda la hora inicial en minutos para cada mesa.
+        let hrinicial2     
+        let hrinicial3
+        let hrinicial4
+        let hrinicial5
+        let hrinicial6
+
+        /*
+         * Funcion constante que recibe el numero de mesa 
+         * para saber cual mesa se está 'rentando'
+        */
+        const mesaUsada = (mesa) => {
+            let uso // Comprueba si la mesa está en uso
+            let horaEnMinutos = (hora*60) + minuto + (segundo/60); // Guarda la hora en
+            if(mesa == 1 ){
+                uso = document.getElementById('MESA1'); //Obtiene el id de la mesa
+                if (uso.src.match('mesaSinUso')){ // Comprueba si esta apagada
+                    uso.src = 'mesaEnUso.png' // Cambia el estado a encendida
+                    document.getElementById("horaIni1").innerHTML = "Hora inicio: " + horaAc; // Pone la hora de inicio
+                    hrinicial1 = (hora*60) + minuto + (segundo/60); // Guarda la hora inicial en minutos
+                } else {                                // Si está prendida entonces...
+                    uso.src = 'mesaSinUso.png'; // Apaga la mesa
+                    document.getElementById("horaFin1").innerHTML = "Hora final: " + horaAc; // Pone la hora final
+                    document.getElementById("total1").innerHTML = "Total: $" + cuenta(hrinicial1, horaEnMinutos );
+                    // Llama a la funcion "cuenta" que recibe la hora inicial y la hora actual en minutos
+                }
+            } else if(mesa == 2 ){
+                uso = document.getElementById('MESA2');
+                if (uso.src.match('mesaSinUso')){
+                    uso.src = 'mesaEnUso.png'
+                    document.getElementById("horaIni2").innerHTML = "Hora inicio: " + horaAc;
+                    hrinicial2 = (hora*60) + minuto + (segundo/60);
+                } else {
+                    uso.src = 'mesaSinUso.png';
+                    document.getElementById("horaFin2").innerHTML = "Hora final: " + horaAc;
+                    document.getElementById("total2").innerHTML = "Total: $" + cuenta(hrinicial2, horaEnMinutos);
+                }
+            }else if(mesa == 3 ){
+                uso = document.getElementById('MESA3');
+                if (uso.src.match('mesaSinUso')){
+                    uso.src = 'mesaEnUso.png'
+                    document.getElementById("horaIni3").innerHTML = "Hora inicio: " + horaAc;
+                    hrinicial3 = (hora*60) + minuto + (segundo/60);
+                } else {
+                    uso.src = 'mesaSinUso.png';
+                    document.getElementById("horaFin3").innerHTML = "Hora final: " + horaAc;
+                    document.getElementById("total3").innerHTML = "Total: $" + cuenta(hrinicial3, horaEnMinutos);
+                }
+            }else if(mesa == 4 ){
+                uso = document.getElementById('MESA4');
+                if (uso.src.match('mesaSinUso')){
+                    uso.src = 'mesaEnUso.png'
+                    document.getElementById("horaIni4").innerHTML = "Hora inicio: " + horaAc;
+                    hrinicial4 = (hora*60) + minuto + (segundo/60);
+                } else {
+                    uso.src = 'mesaSinUso.png';
+                    document.getElementById("horaFin4").innerHTML = "Hora final: " + horaAc;
+                    document.getElementById("total4").innerHTML = "Total: $" + cuenta(hrinicial4, horaEnMinutos);
+                }            
+            }else if(mesa == 5 ){
+                uso = document.getElementById('MESA5');
+                if (uso.src.match('mesaSinUso')){
+                    uso.src = 'mesaEnUso.png'
+                    document.getElementById("horaIni5").innerHTML = "Hora inicio: " + horaAc;
+                    hrinicial5 = (hora*60) + minuto + (segundo/60);
+                } else {
+                    uso.src = 'mesaSinUso.png';
+                    document.getElementById("horaFin5").innerHTML = "Hora final: " + horaAc;
+                    document.getElementById("total5").innerHTML = "Total: $" + cuenta(hrinicial5, horaEnMinutos);
+                }            
+            }else if(mesa == 6 ){
+                uso = document.getElementById('MESA6');
+                if (uso.src.match('mesaSinUso')){
+                    uso.src = 'mesaEnUso.png'
+                    document.getElementById("horaIni6").innerHTML = "Hora inicio: " + horaAc;
+                    hrinicial6 = (hora*60) + minuto + (segundo/60);
+                } else {
+                    uso.src = 'mesaSinUso.png';
+                    document.getElementById("horaFin6").innerHTML = "Hora final: " + horaAc;
+                    document.getElementById("total6").innerHTML = "Total: $" + cuenta(hrinicial6, horaEnMinutos);
+                }            
+            }
+        }
+
+        /*
+         * Funcion para calcular la cuenta del cliente
+         * recibe la hora inicial y la final del uso
+        */ 
+        function cuenta(inicial, final) {
+            let resultado = (final - inicial)*(50/60); // Resta las horas y multiplica por el costo por minuto
+            return resultado; // Devuelve lo que se cobrará al cliente
+        }
+    </script>
+</body>
+</html>
